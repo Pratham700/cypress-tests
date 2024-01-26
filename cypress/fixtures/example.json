@@ -1,0 +1,11 @@
+{
+  "correctUsername": "student",
+  "correctPassword": "Password123",
+  "incorrectUsername": "incorrectUser",
+  "incorrectPassword": "incorrectPassword",
+
+  "email": "hello@cypress.io",
+  "incorrectUserMessage": "Your username is invalid!",
+  "incorrectPasswordMessage": "Your password is invalid!",
+  "body": "Fixtures are a great way to mock data for responses to routes"
+}

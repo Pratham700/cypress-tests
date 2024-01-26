@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2023-12-04T07:42:42.390Z",
+    "end": "2023-12-04T07:42:45.446Z",
+    "duration": 3056,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "20c36fc0-9305-491d-a314-87bb43c8f4f8",
+      "title": "",
+      "fullFile": "cypress/e2e/backend.cy.ts",
+      "file": "cypress/e2e/backend.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c033e6dd-9962-4118-a023-e9a6e0adf9de",
+          "title": "template spec",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "passes",
+              "fullTitle": "template spec passes",
+              "timedOut": null,
+              "duration": 3012,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "let requiredPage = 2;\nRestApiCalls_1.RestApiAgent.listUsersOnPage(requiredPage).then((response) => {\n    expect(response.status).to.eq(200); // Success Response must gve 200 as the response status\n    expect(response.body.data).length.gte(0).lte(response.body.per_page); // Total Users must be aligned with the Pagination Limit.\n    expect(response.body.page).to.eq(requiredPage, \"The page requested page only be in the response.\");\n    console.log(response.body);\n});\nlet requiredUserID = 2;\nRestApiCalls_1.RestApiAgent.getSpecificUser(requiredUserID).then((response) => {\n    expect(response.status).to.eq(200); // Success Response must gve 200 as the response status\n    expect(response.body.data.email).contain(\"@reqres.in\", \"No User Is allowed having Email-ID with other domain\");\n    expect(response.body.data.id).to.eq(requiredUserID); // Requested User's Data should appear\n    expect(response.body.data.first_name).not.empty;\n    console.log(response.body);\n});\nRestApiCalls_1.RestApiAgent.getSpecificUser(24, false).then((response) => {\n    expect(response.status).to.eq(404); // Non Exiting USER should return NOT FOUND Error.\n    console.log(response.body);\n});\nlet userToBeRegistered = new RegisterUser_1.RegisterUser.RegisterUserBuilder()\n    .setEmail(\"eve.holt@reqres.in\").setPassword(\"Api@123\").build();\nconsole.log(userToBeRegistered);\nRestApiCalls_1.RestApiAgent.registerUser(userToBeRegistered)\n    .then((response) => {\n    expect(response.status).to.eq(200);\n    expect(response.body.token).not.empty; //Success Response must give a valid Token\n    console.log(response.body);\n});\nuserToBeRegistered = new RegisterUser_1.RegisterUser.RegisterUserBuilder()\n    .setEmail(\"error@reqres.in\").build();\nRestApiCalls_1.RestApiAgent.registerUser(userToBeRegistered, false)\n    .then((response) => {\n    expect(response.status).to.eq(400); // Without Password API should return 400\n    expect(response.body.error).not.empty; // Error Message should not be empty\n    console.log(response.body);\n});\nuserToBeRegistered = new RegisterUser_1.RegisterUser.RegisterUserBuilder()\n    .setEmail(\"otherDomail@gmail.com\").setPassword(\"valid\").build();\nRestApiCalls_1.RestApiAgent.registerUser(userToBeRegistered, false)\n    .then((response) => {\n    expect(response.status).to.eq(400); // Email with other domains should not be allowed.\n    expect(response.body.error).not.empty; // Error Message should not be empty\n    console.log(response.body);\n});",
+              "err": {
+                "message": "AssertionError: Target cannot be null or undefined.",
+                "estack": "AssertionError: Target cannot be null or undefined.\n    at Context.eval (webpack://cypress-assignment/./cypress/e2e/backend.cy.ts:10:0)",
+                "diff": null
+              },
+              "uuid": "f7246f0a-9b83-4f8e-bc5f-19e128aa56d0",
+              "parentUUID": "c033e6dd-9962-4118-a023-e9a6e0adf9de",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f7246f0a-9b83-4f8e-bc5f-19e128aa56d0"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 3012,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
